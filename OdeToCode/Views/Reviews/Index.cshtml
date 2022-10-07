@@ -11,13 +11,15 @@ we are showing the latest @Model.Count() reviews
 
 @foreach (var item in Model)
 {
-    @:Review
     <div class="review">
         <h4>@item.Name</h4>
         <span>@item.Raiting</span>
         <p>@item.City, @item.Country</p>
+
+        <span>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id})
+        </span>
     </div>
-    @:}
 }
 <p>
     <a asp-action="Create">Create New</a>

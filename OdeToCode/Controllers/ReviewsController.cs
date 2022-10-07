@@ -51,17 +51,23 @@ namespace OdeToCode.Controllers
         // GET: ReviewsController/Edit/5
         public ActionResult Edit(int id)
         {
+            var review = _reviews.Single(r => r.Id == id);
             return View();
         }
 
         // POST: ReviewsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> EditAsync(int id, IFormCollection collection)
         {
             try
             {
+            var review = _reviews.Single(r => r.Id == id);
+            if (await TryUpdateModelAsync (review))
+            {
                 return RedirectToAction(nameof(Index));
+            }
+                return View(review);
             }
             catch
             {
@@ -102,7 +108,7 @@ namespace OdeToCode.Controllers
             },
             new RestaurantReview
             {
-                Id = 1,
+                Id = 2,
                 Name = "Marrakesh",
                 City = "D.C",
                 Country = "USA",
@@ -110,7 +116,7 @@ namespace OdeToCode.Controllers
             },
             new RestaurantReview
             {
-                Id = 1,
+                Id = 3,
                 Name = "The House of Elliot",
                 City = "Ghent",
                 Country = "Belgium",
