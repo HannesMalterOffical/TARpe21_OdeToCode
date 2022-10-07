@@ -62,11 +62,11 @@ namespace OdeToCode.Controllers
         {
             try
             {
-            var review = _reviews.Single(r => r.Id == id);
-            if (await TryUpdateModelAsync (review))
-            {
-                return RedirectToAction(nameof(Index));
-            }
+                var review = _reviews.Single(r => r.Id == id);
+                if (await TryUpdateModelAsync(review))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
                 return View(review);
             }
             catch
@@ -96,7 +96,7 @@ namespace OdeToCode.Controllers
             }
         }
 
-        static List<RestaurantReview> _reviews = new List<RestaurantReview>
+        public static List<RestaurantReview> _reviews = new List<RestaurantReview>
         {
             new RestaurantReview
             {
