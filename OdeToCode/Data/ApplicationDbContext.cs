@@ -13,6 +13,7 @@ namespace OdeToCode.Data
             : base(options)
         {
         }
-        public DbSet<OdeToCode.Models.RestaurantReview> RestaurantReview { get; set; }
+        public DbSet<RestaurantReview> RestaurantReviews { get; set; }
+        public DbSet<Resturant> Resturants { get; set; }
     }
 }

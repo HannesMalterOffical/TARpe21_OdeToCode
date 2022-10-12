@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OdeToCode.Data;
 using OdeToCode.Models;
 using System;
 using System.Collections.Generic;
@@ -11,23 +12,24 @@ namespace OdeToCode.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _db;
+
+        //private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
         {
-            _logger = logger;
+            _db = dbContext;
+
+            //_logger = logger;
         }
 
 
         public IActionResult Index()
         {
-            var controller = RouteData.Values["controller"];
-            var action = RouteData.Values["action"];
-            var id = RouteData.Values["id"];
+            var model = _db.Resturants.ToList();
 
-            ViewBag.Message = $"{controller}::{action} {id}";
-
-            return View();
+            return View(model);
         }
 
         public IActionResult Privacy()
@@ -47,6 +49,14 @@ namespace OdeToCode.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (_db != null)
+            {
+                _db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

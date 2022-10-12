@@ -44,9 +44,6 @@
             @RenderBody()
         </main>
     </div>
-    <div>
-        @await Component.InvokeAsync("BestReview", new{ reviews = OdeToCode.Controllers.ReviewsController._reviews })
-    </div>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - OdeToCode - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
