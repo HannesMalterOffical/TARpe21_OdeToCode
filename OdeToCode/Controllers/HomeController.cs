@@ -25,11 +25,28 @@ namespace OdeToCode.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult Index(string searchTerm = null)
         {
-            var model = _db.Resturants.ToList();
+            var model = _db.Resturants
+                .OrderByDescending(r => r.Reviews.Average(review => review.Raiting))
+                .Where(r => searchTerm == null || r.Name.StartsWith(searchTerm))
+                .Take(10)
+                .Select(r => new RestaurantListViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    City = r.City,
+                    Country = r.Country,
+                    CountOfReviews = r.Reviews.Count
+                });
 
-            return View(model);
+
+            //var model = from r in _db.Resturants
+            //            where r.Country == "USA"
+            //            orderby r.Name
+            //            select r;
+
+                return View(model);
         }
 
         public IActionResult Privacy()

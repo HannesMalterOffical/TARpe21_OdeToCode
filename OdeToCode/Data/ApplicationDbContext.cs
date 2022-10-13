@@ -12,6 +12,7 @@ namespace OdeToCode.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
         public DbSet<RestaurantReview> RestaurantReviews { get; set; }
         public DbSet<Resturant> Resturants { get; set; }
