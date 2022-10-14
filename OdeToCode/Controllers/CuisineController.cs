@@ -12,7 +12,6 @@ namespace OdeToCode.Controllers
     [Log]
     public class CuisineController : Controller
     {
-        //[Authorize]
         public IActionResult Search(string name ="unknown")
         {
             var message = HtmlEncoder.Default.Encode(name);

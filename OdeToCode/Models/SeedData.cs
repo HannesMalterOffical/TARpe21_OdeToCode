@@ -44,7 +44,7 @@ namespace OdeToCode.Models
                         Reviews = 
                             new List<RestaurantReview> {
                             new RestaurantReview { Raiting = 9, Body = "Great Food!"}
-                        }
+                            }
                     }
                 );
                 context.SaveChanges();
