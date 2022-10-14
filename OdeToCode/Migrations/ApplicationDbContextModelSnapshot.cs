@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OdeToCode.Data;
 
-namespace OdeToCode.Data.Migrations
+namespace OdeToCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -219,32 +219,9 @@ namespace OdeToCode.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("OdeToCode.Models.RestaurantReview", b =>
+            modelBuilder.Entity("OdeToCode.Models.Restaurant", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Body")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Raiting")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ResturantId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ResturantId");
-
-                    b.ToTable("RestaurantReviews");
-                });
-
-            modelBuilder.Entity("OdeToCode.Models.Resturant", b =>
-                {
-                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -258,9 +235,35 @@ namespace OdeToCode.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Restaurants");
+                });
+
+            modelBuilder.Entity("OdeToCode.Models.RestaurantReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Raiting")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RestaurantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ResturantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
+
+                    b.ToTable("RestaurantReviews");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -316,14 +319,12 @@ namespace OdeToCode.Data.Migrations
 
             modelBuilder.Entity("OdeToCode.Models.RestaurantReview", b =>
                 {
-                    b.HasOne("OdeToCode.Models.Resturant", null)
+                    b.HasOne("OdeToCode.Models.Restaurant", null)
                         .WithMany("Reviews")
-                        .HasForeignKey("ResturantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RestaurantId");
                 });
 
-            modelBuilder.Entity("OdeToCode.Models.Resturant", b =>
+            modelBuilder.Entity("OdeToCode.Models.Restaurant", b =>
                 {
                     b.Navigation("Reviews");
                 });
