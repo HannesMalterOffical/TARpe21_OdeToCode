@@ -7,7 +7,7 @@ namespace OdeToCode.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Resturants",
+                name: "Restaurants",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -18,7 +18,7 @@ namespace OdeToCode.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Resturants", x => x.id);
+                    table.PrimaryKey("PK_Restaurants", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -35,9 +35,9 @@ namespace OdeToCode.Data.Migrations
                 {
                     table.PrimaryKey("PK_RestaurantReviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RestaurantReviews_Resturants_ResturantId",
+                        name: "FK_RestaurantReviews_Restaurants_RestaurantId",
                         column: x => x.ResturantId,
-                        principalTable: "Resturants",
+                        principalTable: "Restaurants",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -54,7 +54,7 @@ namespace OdeToCode.Data.Migrations
                 name: "RestaurantReviews");
 
             migrationBuilder.DropTable(
-                name: "Resturants");
+                name: "Restaurants");
         }
     }
 }

@@ -17,7 +17,7 @@ namespace odetocode.controllers
         // get: ReviewsController
         public async Task<IActionResult> index([Bind(Prefix = "id")]int restaurantId)
         {
-            var resturant = await _context.Resturants
+            var resturant = await _context.Restaurants
                .Include(r => r.Reviews)
                .FirstOrDefaultAsync(m => m.Id == restaurantId);
             if (resturant == null)

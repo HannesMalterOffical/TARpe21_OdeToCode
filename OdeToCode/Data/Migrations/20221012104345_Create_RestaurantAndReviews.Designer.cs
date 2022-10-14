@@ -262,7 +262,7 @@ namespace OdeToCode.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Resturants");
+                    b.ToTable("Restaurants");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

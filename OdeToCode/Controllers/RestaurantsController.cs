@@ -10,11 +10,11 @@ using OdeToCode.Models;
 
 namespace OdeToCode.Controllers
 {
-    public class ResturantsController : Controller
+    public class RestaurantsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ResturantsController(ApplicationDbContext context)
+        public RestaurantsController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -22,7 +22,7 @@ namespace OdeToCode.Controllers
         // GET: Resturants
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Resturants.ToListAsync());
+            return View(await _context.Restaurants.ToListAsync());
         }
 
         // GET: Resturants/Details/5
@@ -33,7 +33,7 @@ namespace OdeToCode.Controllers
                 return NotFound();
             }
 
-            var resturant = await _context.Resturants
+            var resturant = await _context.Restaurants
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (resturant == null)
             {
@@ -54,7 +54,7 @@ namespace OdeToCode.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,City,Country")] Resturant resturant)
+        public async Task<IActionResult> Create([Bind("Id,Name,City,Country")] Restaurant resturant)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace OdeToCode.Controllers
                 return NotFound();
             }
 
-            var resturant = await _context.Resturants.FindAsync(id);
+            var resturant = await _context.Restaurants.FindAsync(id);
             if (resturant == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace OdeToCode.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,City,Country")] Resturant resturant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,City,Country")] Restaurant resturant)
         {
             if (id != resturant.Id)
             {
@@ -124,7 +124,7 @@ namespace OdeToCode.Controllers
                 return NotFound();
             }
 
-            var resturant = await _context.Resturants
+            var resturant = await _context.Restaurants
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (resturant == null)
             {
@@ -139,15 +139,15 @@ namespace OdeToCode.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var resturant = await _context.Resturants.FindAsync(id);
-            _context.Resturants.Remove(resturant);
+            var resturant = await _context.Restaurants.FindAsync(id);
+            _context.Restaurants.Remove(resturant);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ResturantExists(int id)
         {
-            return _context.Resturants.Any(e => e.Id == id);
+            return _context.Restaurants.Any(e => e.Id == id);
         }
     }
 }

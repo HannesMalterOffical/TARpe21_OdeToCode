@@ -27,7 +27,7 @@ namespace OdeToCode.Controllers
 
         public IActionResult Index(string searchTerm = null)
         {
-            var model = _db.Resturants
+            var model = _db.Restaurants
                 .OrderByDescending(r => r.Reviews.Average(review => review.Raiting))
                 .Where(r => searchTerm == null || r.Name.StartsWith(searchTerm))
                 .Take(10)
