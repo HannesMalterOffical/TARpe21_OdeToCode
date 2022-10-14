@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OdeToCode.Data;
+using OdeToCode.Models;
 using System.Threading.Tasks;
 
 namespace odetocode.controllers
@@ -25,6 +26,24 @@ namespace odetocode.controllers
             }
 
             return View(resturant);
+        }
+
+        [HttpGet]
+        public ActionResult Create(int restaurantId)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(RestaurantReview review)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.RestaurantReviews.Add(review);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(index), 
+                    new { id = review.ResturantId });
+            }
+            return View(review);
         }
     }
 }
