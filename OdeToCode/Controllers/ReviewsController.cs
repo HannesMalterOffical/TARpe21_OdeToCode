@@ -34,6 +34,8 @@ namespace odetocode.controllers
         {
             return View();
         }
+
+
         [HttpPost]
         public ActionResult Create(RestaurantReview review)
         {
@@ -41,10 +43,12 @@ namespace odetocode.controllers
             {
                 _context.RestaurantReviews.Add(review);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index), 
-                    new { id = review.RestaurantId });
+                return RedirectToAction(nameof(Index), new { id = review.RestaurantId });
+
             }
             return View(review);
+
+
         }
     }
 }
