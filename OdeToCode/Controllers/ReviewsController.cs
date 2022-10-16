@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OdeToCode.Data;
 using OdeToCode.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace odetocode.controllers
@@ -17,15 +18,15 @@ namespace odetocode.controllers
         // get: ReviewsController
         public async Task<IActionResult> index([Bind(Prefix = "id")]int restaurantId)
         {
-            var resturant = await _context.Restaurants
+            var restaurant = await _context.Restaurants
                .Include(r => r.Reviews)
                .FirstOrDefaultAsync(m => m.Id == restaurantId);
-            if (resturant == null)
+            if (restaurant == null)
             {
                 return NotFound();
             }
 
-            return View(resturant);
+            return View(restaurant);
         }
 
         [HttpGet]
@@ -40,8 +41,8 @@ namespace odetocode.controllers
             {
                 _context.RestaurantReviews.Add(review);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(index), 
-                    new { id = review.ResturantId });
+                return RedirectToAction(nameof(Index), 
+                    new { id = review.RestaurantId });
             }
             return View(review);
         }
