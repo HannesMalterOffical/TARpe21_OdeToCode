@@ -28,7 +28,7 @@ namespace OdeToCode.Models
         }
     }
 
-    public class RestaurantReview
+    public class RestaurantReview : IValidatableObject
     {
         public int Id { get; set; }
 
@@ -44,5 +44,14 @@ namespace OdeToCode.Models
         [StringLength(1024)]
         public string ReviewerName { get; set; }
         public int? RestaurantId { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Raiting<2&&ReviewerName.ToLower().StartsWith("scott"))
+            {
+                yield return new ValidationResult("sorry,you can't do that");
+            }
+        }
     }
+    
 }
