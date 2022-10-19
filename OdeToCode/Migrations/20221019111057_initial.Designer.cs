@@ -10,7 +10,7 @@ using OdeToCode.Data;
 namespace OdeToCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221014085216_initial")]
+    [Migration("20221019111057_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -258,8 +258,8 @@ namespace OdeToCode.Migrations
                     b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ResturantId")
-                        .HasColumnType("int");
+                    b.Property<string>("ReviewerName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

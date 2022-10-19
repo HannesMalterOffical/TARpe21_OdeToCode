@@ -256,8 +256,8 @@ namespace OdeToCode.Migrations
                     b.Property<int?>("RestaurantId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ResturantId")
-                        .HasColumnType("int");
+                    b.Property<string>("ReviewerName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

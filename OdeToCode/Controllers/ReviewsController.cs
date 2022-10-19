@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OdeToCode.Data;
 using OdeToCode.Models;
+using OdeToCode.Models.Review_Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -65,7 +66,10 @@ namespace odetocode.controllers
             }
             return View(review);
         }
-        public async Task<IActionResult> Edit(int id, RestaurantReview review)
+
+        [HttpPost]
+
+        public async Task<IActionResult> Edit(int id, RestaurantReviewEditViewModel review)
         {
             if (id != review.Id)
             {
@@ -76,7 +80,12 @@ namespace odetocode.controllers
             {
                 try
                 {
-                    _context.Update(review);
+                    var currentReview = await _context.RestaurantReviews.FindAsync
+                        (id);
+                    currentReview.Body = review.Body;
+                    currentReview.Raiting = review.Raiting;
+                    _context.Entry(currentReview).State = EntityState.Modified;
+                    //_context.Update(review);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

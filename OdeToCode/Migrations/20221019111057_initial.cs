@@ -175,6 +175,7 @@ namespace OdeToCode.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Raiting = table.Column<int>(type: "int", nullable: false),
                     Body = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReviewerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RestaurantId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

@@ -33,14 +33,14 @@ namespace OdeToCode.Controllers
                 return NotFound();
             }
 
-            var resturant = await _context.Restaurants
+            var restaurant = await _context.Restaurants
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (resturant == null)
+            if (restaurant == null)
             {
                 return NotFound();
             }
 
-            return View(resturant);
+            return View(restaurant);
         }
 
         // GET: Resturants/Create
@@ -54,15 +54,15 @@ namespace OdeToCode.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,City,Country")] Restaurant resturant)
+        public async Task<IActionResult> Create([Bind("Id,Name,City,Country")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(resturant);
+                _context.Add(restaurant);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(resturant);
+            return View(restaurant);
         }
 
         // GET: Resturants/Edit/5
@@ -73,12 +73,12 @@ namespace OdeToCode.Controllers
                 return NotFound();
             }
 
-            var resturant = await _context.Restaurants.FindAsync(id);
-            if (resturant == null)
+            var restaurant = await _context.Restaurants.FindAsync(id);
+            if (restaurant == null)
             {
                 return NotFound();
             }
-            return View(resturant);
+            return View(restaurant);
         }
 
         // POST: Resturants/Edit/5
@@ -86,9 +86,9 @@ namespace OdeToCode.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,City,Country")] Restaurant resturant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,City,Country")] Restaurant restaurant)
         {
-            if (id != resturant.Id)
+            if (id != restaurant.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace OdeToCode.Controllers
             {
                 try
                 {
-                    _context.Update(resturant);
+                    _context.Update(restaurant);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ResturantExists(resturant.Id))
+                    if (!ResturantExists(restaurant.Id))
                     {
                         return NotFound();
                     }
@@ -113,7 +113,7 @@ namespace OdeToCode.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(resturant);
+            return View(restaurant);
         }
 
         // GET: Resturants/Delete/5
@@ -124,14 +124,14 @@ namespace OdeToCode.Controllers
                 return NotFound();
             }
 
-            var resturant = await _context.Restaurants
+            var restaurant = await _context.Restaurants
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (resturant == null)
+            if (restaurant == null)
             {
                 return NotFound();
             }
 
-            return View(resturant);
+            return View(restaurant);
         }
 
         // POST: Resturants/Delete/5
@@ -139,8 +139,8 @@ namespace OdeToCode.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var resturant = await _context.Restaurants.FindAsync(id);
-            _context.Restaurants.Remove(resturant);
+            var restaurant = await _context.Restaurants.FindAsync(id);
+            _context.Restaurants.Remove(restaurant);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

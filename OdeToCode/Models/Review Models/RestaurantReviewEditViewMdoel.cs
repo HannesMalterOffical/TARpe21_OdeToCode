@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OdeToCode.Models
+namespace OdeToCode.Models.Review_Models
 {
-    public class RestaurantReview
+    public class RestaurantReviewEditViewModel
     {
         public int Id { get; set; }
         public int Raiting { get; set; }
         public string Body { get; set; }
-        public string ReviewerName { get; set; }
-        public int? RestaurantId { get; set; }
+        public int RestaurantId { get; set; }
     }
 }
