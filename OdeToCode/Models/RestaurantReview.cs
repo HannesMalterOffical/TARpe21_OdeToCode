@@ -10,6 +10,7 @@ namespace OdeToCode.Models
         public int Id { get; set; }
         public int Raiting { get; set; }
         public string Body { get; set; }
+        public string Reviewer { get; set; }
         public int RestaurantId { get; set; }
     }
 }

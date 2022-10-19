@@ -1,6 +1,12 @@
 ﻿@model OdeToCode.Models.RestaurantReview
 
-<h4>Edit review</h4>
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Edit Review</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,8 +23,7 @@
                 <input asp-for="Body" class="form-control" />
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
-            @Html.HiddenFor(model => model.RestaurantId)
-
+            <input type="hidden" asp-for="RestaurantId"/>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
