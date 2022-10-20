@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCore.Unobtrusive.Ajax;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OdeToCode.Data;
 using OdeToCode.Models;
@@ -45,6 +46,11 @@ namespace OdeToCode.Controllers
             //            where r.Country == "USA"
             //            orderby r.Name
             //            select r;
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Restaurants", model);
+            }
 
                 return View(model);
         }

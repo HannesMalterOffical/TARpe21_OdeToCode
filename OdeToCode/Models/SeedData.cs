@@ -40,12 +40,21 @@ namespace OdeToCode.Models
                         Name = "Paradox Con",
                         City = "Stockholm",
                         Country = "Sweden",
-                        Reviews = 
+                        Reviews =
                             new List<RestaurantReview> {
                             new RestaurantReview { Raiting = 9, Body = "Great Food!"}
                             }
-                    }
-                );
+                    });
+                for (int i = 0; i < 1000; i++)
+                {
+                    context.Restaurants.AddRange(
+                    new Restaurant
+                    {
+                        Name = $"{i}. eatry",
+                        City = "Nowhere",
+                        Country = "USA"
+                    });
+                }
                 context.SaveChanges();
             }
         }

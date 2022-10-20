@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCore.Unobtrusive.Ajax;
 
 namespace OdeToCode
 {
@@ -31,6 +32,7 @@ namespace OdeToCode
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddUnobtrusiveAjax();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -53,7 +55,7 @@ namespace OdeToCode
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseUnobtrusiveAjax();
             app.UseRouting();
 
             app.UseAuthentication();
