@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace OdeToCode.Controllers
 {
@@ -21,7 +22,6 @@ namespace OdeToCode.Controllers
             var model =
                 _db.Restaurants
                     .Where(r => r.Name.StartsWith(term))
-                    .Take(10)
                     .Select(r => new
                     {
                         label = r.Name
@@ -39,7 +39,7 @@ namespace OdeToCode.Controllers
         }
 
 
-        public IActionResult Index(string searchTerm = null)
+        public IActionResult Index(string searchTerm = null, int Page = 1)
         {
             var model = _db.Restaurants
                 .OrderByDescending(r => r.Reviews.Average(review => review.Raiting))
@@ -52,13 +52,8 @@ namespace OdeToCode.Controllers
                     City = r.City,
                     Country = r.Country,
                     CountOfReviews = r.Reviews.Count
-                });
-
-
-            //var model = from r in _db.Resturants
-            //            where r.Country == "USA"
-            //            orderby r.Name
-            //            select r;
+                }
+            ).ToPagedList(Page, 10);
 
             if (Request.IsAjaxRequest())
             {

@@ -50,7 +50,7 @@ namespace OdeToCode.Models
                     context.Restaurants.AddRange(
                     new Restaurant
                     {
-                        Name = $"{i}. eatry",
+                        Name = $"{i}",
                         City = "Nowhere",
                         Country = "USA"
                     });
