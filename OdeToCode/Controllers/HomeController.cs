@@ -16,6 +16,8 @@ namespace OdeToCode.Controllers
 
         private readonly ApplicationDbContext _db;
 
+
+
         //private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext dbContext)
