@@ -8,21 +8,9 @@
 <form method="get"
       data-otf-ajax="true" data-otf-target="restaurantList">
 
-
-        <input type="search" name="searchterm" value=""/>
+        <input type="search" name="searchterm" value="" data-otf-autocomplete="@Url.Action("Autocomplete")" />
         <input type="submit" value="search by name"/>
    </form>
-
-@*@using (Html.AjaxBeginForm(new AjaxOptions
-{
-    HttpMethod = "get",
-    InsertionMode = InsertionMode.Replace,
-    UpdateTargetId = "restaurantList"
-}))
-{
-    <input type="search" name="searchTerm" value="" />
-    <input type="submit" value="Search by name" />
-}*@
 
 <partial name="_Restaurants" model="Model"/>
 

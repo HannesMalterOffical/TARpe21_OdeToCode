@@ -16,7 +16,18 @@ namespace OdeToCode.Controllers
 
         private readonly ApplicationDbContext _db;
 
-
+        public ActionResult Autocomplete(string term)
+        {
+            var model =
+                _db.Restaurants
+                    .Where(r => r.Name.StartsWith(term))
+                    .Take(10)
+                    .Select(r => new
+                    {
+                        label = r.Name
+                    });
+            return Json(model);
+        }
 
         //private readonly ILogger<HomeController> _logger;
 
