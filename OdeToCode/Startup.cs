@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using OdeToCode.Data;
 using System;
 using System.Collections.Generic;
+using OdeToCode.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCore.Unobtrusive.Ajax;
@@ -34,7 +35,7 @@ namespace OdeToCode
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddUnobtrusiveAjax();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<OdeToCodeUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
         }
