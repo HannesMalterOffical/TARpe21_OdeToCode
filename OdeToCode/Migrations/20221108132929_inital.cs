@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OdeToCode.Migrations
 {
-    public partial class initial : Migration
+    public partial class inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,6 +26,8 @@ namespace OdeToCode.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FavoriteRestaurant = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -174,8 +176,8 @@ namespace OdeToCode.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Raiting = table.Column<int>(type: "int", nullable: false),
-                    Body = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ReviewerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Body = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
+                    ReviewerName = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
                     RestaurantId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

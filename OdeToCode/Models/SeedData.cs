@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using OdeToCode.Data;
 using System;
@@ -17,6 +18,30 @@ namespace OdeToCode.Models
                 {
                     return;   // DB has been seeded
                 }
+
+                //public static void SeedIdentity(UserMananger<OdeToCodeUser> userMananger, RoleMananger<IdentityRole> roleMananger)
+                //{
+                //    var user = UserManager.FindByNameAsync("hannesmalter1234@gmail.com").Result;
+                //    if (user==null)
+                //    {
+                //        user = new OdeToCodeUser();
+                //        user.Email = "hannesmalter1234@gmail.com";
+                //        user =
+                //        user =
+                //    }
+                //}
+                role = new IdentityRole("Admin");
+                IdentityResult result = RoleManager.CreateAsync(role).Result;
+                if (role==null)
+                {
+                    
+                    
+                }
+
+
+
+
+
 
                 context.Restaurants.AddRange(
                     new Restaurant
