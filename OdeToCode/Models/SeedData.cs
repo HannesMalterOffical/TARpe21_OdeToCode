@@ -1,45 +1,31 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using OdeToCode.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using OdeToCode.Models;
 
 namespace OdeToCode.Models
 {
     public static class SeedData
     {
+            public const string ROLE_ADMIN = "Admin";
         public static void Initialize(IServiceProvider serviceProvider)
         {
+           
+
             using (var context = new ApplicationDbContext(serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
+
+
                 if (context.Restaurants.Any())
                 {
                     return;   // DB has been seeded
                 }
-
-                //public static void SeedIdentity(UserMananger<OdeToCodeUser> userMananger, RoleMananger<IdentityRole> roleMananger)
-                //{
-                //    var user = UserManager.FindByNameAsync("hannesmalter1234@gmail.com").Result;
-                //    if (user==null)
-                //    {
-                //        user = new OdeToCodeUser();
-                //        user.Email = "hannesmalter1234@gmail.com";
-                //        user =
-                //        user =
-                //    }
-                //}
-                role = new IdentityRole("Admin");
-                IdentityResult result = RoleManager.CreateAsync(role).Result;
-                if (role==null)
-                {
-                    
-                    
-                }
-
-
-
 
 
 
@@ -82,6 +68,36 @@ namespace OdeToCode.Models
                 }
                 context.SaveChanges();
             }
+        }
+        public static async Task SeedIdentity(UserManager<OdeToCodeUser> userManager, RoleManager<OdeToCodeRole> roleManager)
+        {
+            var user = await userManager.FindByNameAsync("kristjan@thkit.ee");
+            if (user == null)
+            {
+                user = new OdeToCodeUser();
+                user.Email = "kristjan@thkit.ee";
+                user.EmailConfirmed = true;
+                user.UserName = "kristjan@thkit.ee";
+                var userResult = await userManager.CreateAsync(user);
+                if (!userResult.Succeeded)
+                {
+                    throw new Exception($"User creation failed: {userResult.Errors.FirstOrDefault()}");
+                }
+                await userManager.AddPasswordAsync(user, "Pa$$w0rd");
+            }
+            var role = await roleManager.FindByNameAsync(ROLE_ADMIN);
+            if (role == null)
+            {
+                role = new OdeToCodeRole();
+                role.Name = ROLE_ADMIN;
+                role.NormalizedName = ROLE_ADMIN;
+                var roleResult = roleManager.CreateAsync(role).Result;
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception(roleResult.Errors.First().Description);
+                }
+            }
+            await userManager.AddToRoleAsync(user, ROLE_ADMIN);
         }
     }
 }

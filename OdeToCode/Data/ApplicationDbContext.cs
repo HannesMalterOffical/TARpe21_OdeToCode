@@ -17,5 +17,6 @@ namespace OdeToCode.Data
         public DbSet<RestaurantReview> RestaurantReviews { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<OdeToCodeUser> OdeToCodeUsers { get; set; }
+        public DbSet<OdeToCodeRole> OdeToCodeRoles { get; set; }
     }
 }

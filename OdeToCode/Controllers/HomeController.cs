@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using OdeToCode.Data;
 using OdeToCode.Models;
 using System;
+using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,11 +13,12 @@ using X.PagedList;
 
 namespace OdeToCode.Controllers
 {
+    [Authorize(Roles ="administrators,sales")]
     public class HomeController : Controller
     {
 
         private readonly ApplicationDbContext _db;
-
+        [AllowAnonymous]
         public ActionResult Autocomplete(string term)
         {
             var model =
@@ -38,7 +40,7 @@ namespace OdeToCode.Controllers
             //_logger = logger;
         }
 
-
+        [AllowAnonymous]
         public IActionResult Index(string searchTerm = null, int Page = 1)
         {
             var model = _db.Restaurants
