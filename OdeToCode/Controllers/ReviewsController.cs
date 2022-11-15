@@ -32,6 +32,7 @@ namespace odetocode.controllers
         }
 
         [HttpGet]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(int restaurantId)
         {
             return View();
