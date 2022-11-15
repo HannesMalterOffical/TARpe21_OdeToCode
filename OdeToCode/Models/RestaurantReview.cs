@@ -35,7 +35,9 @@ namespace OdeToCode.Models
         [Range(1, 10)]
         public int Raiting { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType =typeof(Resources.Models.RestaurantReview),
+            ErrorMessageResourceName = "Required")]
+
         [StringLength(1024)]
         public string Body { get; set; }
 
